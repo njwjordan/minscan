@@ -54,8 +54,8 @@ function stop_scanning() {
 
 function clear_results() {
   if (confirm("Are you sure") == true) {
-                 localStorage.setItem("resultlist",null);
-                   resultElem.value = null;
+                 localStorage.setItem("resultlist","");
+                   resultElem.value = "";
 }
   
 
