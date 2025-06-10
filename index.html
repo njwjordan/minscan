@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hello Bulma!</title>
+    <title>minscan</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
 
     <script type="module">
@@ -11,6 +11,7 @@ let videoElem = document.getElementById("qrscan");
 let resultElem = document.getElementById("result");
 const button_start = document.querySelector("#start-scanning");
 const button_stop = document.querySelector("#stop-scanning");
+      const button_clear_results = document.querySelector("#clear-results");
 import QrScanner from "https://esm.sh/qr-scanner";
 
 let loaded_value = localStorage.getItem("resultlist");
@@ -51,6 +52,15 @@ function stop_scanning() {
   button_start.style.display = "inline-block";
 }
 
+function clear_results() {
+  if (confirm("Are you sure") == true) {
+                 localStorage.setItem("resultlist",null);
+                   resultElem.value = null;
+}
+  
+
+}
+
 button_start.addEventListener("click", (event) => {
   start_scanning();
 });
@@ -58,6 +68,10 @@ button_start.addEventListener("click", (event) => {
 button_stop.addEventListener("click", (event) => {
   stop_scanning();
 });
+button_clear_results.addEventListener("click", (event) => {
+  clear_results();
+});
+
     </script>
   </head>
   <body>
@@ -84,7 +98,9 @@ button_stop.addEventListener("click", (event) => {
       <p class="subtitle">
         Find your scanned data here
       </p>
-      
+<div class="buttons">
+              <button class="button is-danger" id="clear-results">Clear Results</button>
+</div>
       <textarea class="textarea" id="result"></textarea>
     </div>
   </section>
