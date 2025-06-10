@@ -11,7 +11,8 @@ let videoElem = document.getElementById("qrscan");
 let resultElem = document.getElementById("result");
 const button_start = document.querySelector("#start-scanning");
 const button_stop = document.querySelector("#stop-scanning");
-      const button_clear_results = document.querySelector("#clear-results");
+const button_copy = document.querySelector("#copy-results");
+const button_clear_results = document.querySelector("#clear-results");
 import QrScanner from "https://esm.sh/qr-scanner";
 
 let loaded_value = localStorage.getItem("resultlist");
@@ -57,9 +58,17 @@ function clear_results() {
                  localStorage.setItem("resultlist","");
                    resultElem.value = "";
 }
+
   
 
 }
+  
+function copy_results() {
+  resultElem.select();
+  resultElem.setSelectionRange(0, 99999);
+    navigator.clipboard.writeText(resultElem.value);
+                   navigator.vibrate(200);
+}  
 
 button_start.addEventListener("click", (event) => {
   start_scanning();
@@ -71,6 +80,12 @@ button_stop.addEventListener("click", (event) => {
 button_clear_results.addEventListener("click", (event) => {
   clear_results();
 });
+
+
+button_copy.addEventListener("click", (event) => {
+  copy_results();
+});
+
 
     </script>
   </head>
@@ -100,6 +115,8 @@ button_clear_results.addEventListener("click", (event) => {
       </p>
 <div class="buttons">
               <button class="button is-danger" id="clear-results">Clear Results</button>
+    
+                <button class="button is-primary" id="copy-results">Copy Results</button>
 </div>
       <textarea class="textarea" id="result"></textarea>
     </div>
