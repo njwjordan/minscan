@@ -5,17 +5,89 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Hello Bulma!</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
+
+    <script type="module">
+let videoElem = document.getElementById("qrscan");
+let resultElem = document.getElementById("result");
+const button_start = document.querySelector("#start-scanning");
+const button_stop = document.querySelector("#stop-scanning");
+import QrScanner from "https://esm.sh/qr-scanner";
+
+let loaded_value = localStorage.getItem("resultlist");
+resultElem.value = loaded_value;
+
+
+const qrScanner = new QrScanner(
+    videoElem,
+    result => { console.log('decoded qr code:', result);     stop_scanning();
+                 navigator.vibrate(200);
+               let str = result.data;
+               
+               if (str.indexOf(',') != -1) {
+    var segments = str.split(',');
+                 let final_string = resultElem.value + segments[0] + `\n`;
+                 resultElem.value = final_string;
+                 
+                 localStorage.setItem("resultlist",final_string);
+                                
+}
+               
+
+              },
+    { /* your options or returnDetailedScanResult: true if you're not specifying any other options */ },
+);
+
+
+
+function start_scanning() {
+    qrScanner.start();
+  button_start.style.display = "none";
+  button_stop.style.display = "inline-block";
+}
+
+function stop_scanning() {
+  qrScanner.stop();
+  button_stop.style.display = "none";
+  button_start.style.display = "inline-block";
+}
+
+button_start.addEventListener("click", (event) => {
+  start_scanning();
+});
+
+button_stop.addEventListener("click", (event) => {
+  stop_scanning();
+});
+    </script>
   </head>
   <body>
+
   <section class="section">
     <div class="container">
       <h1 class="title">
-        Hello World
+        QR Scanner
       </h1>
       <p class="subtitle">
-        My first website with <strong>Bulma</strong>!
+        Tool for scanning specialist <strong>QR codes</strong>!
       </p>
+      
+      <div class="buttons">
+        <button class="button is-primary" id="start-scanning">Start Scanning</button>
+        <button class="button is-danger" id="stop-scanning" style="display:none;">Stop Scanning</button>
+      </div>
+      
+      <video id="qrscan"></video>
+      
+            <h1 class="title">
+        Results
+      </h1>
+      <p class="subtitle">
+        Find your scanned data here
+      </p>
+      
+      <textarea class="textarea" id="result"></textarea>
     </div>
   </section>
+
   </body>
 </html>
