@@ -8,7 +8,7 @@
 
     <script type="module">
 let videoElem = document.getElementById("qrscan");
-let resultElem = document.getElementById("result");
+let resultElem = document.querySelector("#result");
 const button_start = document.querySelector("#start-scanning");
 const button_stop = document.querySelector("#stop-scanning");
 const button_copy = document.querySelector("#copy-results");
@@ -22,7 +22,6 @@ resultElem.value = loaded_value;
 const qrScanner = new QrScanner(
     videoElem,
     result => { 
-      alert("asdad"+result.data);
       console.log('decoded qr code:', result);     stop_scanning();
                  navigator.vibrate(200);
                let str = result.data;
@@ -96,7 +95,7 @@ button_copy.addEventListener("click", (event) => {
   <section class="section">
     <div class="container">
       <h1 class="title">
-        QR Scanner
+        QR Scanner 2.0
       </h1>
       <p class="subtitle">
         Tool for scanning specialist <strong>QR codes</strong>!
