@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>minscan</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
-
+<script src="jquery-3.7.1.min.js"></script>
     <script type="module">
 let videoElem = document.getElementById("qrscan");
 let resultElem = document.querySelector("#result");
@@ -29,7 +29,7 @@ const qrScanner = new QrScanner(
                if (str.indexOf(',') != -1) {
     var segments = str.split(',');
                  let final_string = resultElem.value + segments[0] + `\n`;
-                 resultElem.value = final_string;
+                 $("#result").val(final_string);
                  
                  localStorage.setItem("resultlist",final_string);
                                 
@@ -95,7 +95,7 @@ button_copy.addEventListener("click", (event) => {
   <section class="section">
     <div class="container">
       <h1 class="title">
-        QR Scanner 2.0
+        QR Scanner 2.1
       </h1>
       <p class="subtitle">
         Tool for scanning specialist <strong>QR codes</strong>!
