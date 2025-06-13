@@ -21,7 +21,9 @@ resultElem.value = loaded_value;
 
 const qrScanner = new QrScanner(
     videoElem,
-    result => { console.log('decoded qr code:', result);     stop_scanning();
+    result => { 
+      alert("asdad"+result.data);
+      console.log('decoded qr code:', result);     stop_scanning();
                  navigator.vibrate(200);
                let str = result.data;
                
